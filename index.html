@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio — Under Development</title>
+  <meta name="description" content="My portfolio is under development. Check back soon." />
+  <style>
+    :root {
+      --bg1: #0b1020;
+      --bg2: #0f1b3a;
+      --card: rgba(255, 255, 255, 0.08);
+      --card2: rgba(255, 255, 255, 0.12);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.72);
+      --line: rgba(255,255,255,0.18);
+      --accent: #7c5cff;
+      --accent2: #22c55e;
+      --shadow: 0 24px 60px rgba(0,0,0,0.45);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:
+        radial-gradient(1200px 700px at 15% 20%, rgba(124,92,255,0.35), transparent 60%),
+        radial-gradient(900px 600px at 85% 35%, rgba(34,197,94,0.25), transparent 55%),
+        radial-gradient(800px 500px at 55% 85%, rgba(56,189,248,0.18), transparent 60%),
+        linear-gradient(160deg, var(--bg1), var(--bg2));
+      overflow-x: hidden;
+    }
+
+    .wrap {
+      min-height: 100%;
+      display: grid;
+      place-items: center;
+      padding: 28px 18px;
+    }
+
+    .card {
+      width: min(980px, 100%);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--card), rgba(255,255,255,0.04));
+      box-shadow: var(--shadow);
+      border-radius: 22px;
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background: radial-gradient(700px 240px at 20% 20%, rgba(124,92,255,0.22), transparent 60%),
+                  radial-gradient(700px 240px at 90% 10%, rgba(34,197,94,0.18), transparent 55%);
+      pointer-events: none;
+    }
+
+    header {
+      position: relative;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(124,92,255,0.9), rgba(34,197,94,0.85));
+      border: 1px solid rgba(255,255,255,0.25);
+      box-shadow: 0 12px 30px rgba(124,92,255,0.22);
+      position: relative;
+      overflow: hidden;
+    }
+    .logo::after{
+      content:"";
+      position:absolute;
+      inset:-20%;
+      background: conic-gradient(from 180deg, rgba(255,255,255,0.25), transparent 45%, rgba(255,255,255,0.15));
+      filter: blur(2px);
+      animation: spin 7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .titleblock h1 {
+      margin: 0;
+      font-size: clamp(22px, 4vw, 34px);
+      letter-spacing: -0.02em;
+      line-height: 1.12;
+    }
+    .titleblock p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14.5px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.86);
+      font-size: 13px;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 99px;
+      background: var(--accent2);
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.18);
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.25); opacity: 1; }
+    }
+
+    .content {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+      margin-top: 12px;
+    }
+    @media (max-width: 860px) {
+      .content { grid-template-columns: 1fr; }
+    }
+
+    .panel {
+      border: 1px solid rgba(255,255,255,0.14);
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .hero h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+    }
+    .hero p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .progress {
+      border-top: 1px dashed rgba(255,255,255,0.18);
+      margin-top: 14px;
+      padding-top: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .barrow {
+      display: grid;
+      gap: 8px;
+    }
+    .barrow .label {
+      display: flex;
+      justify-content: space-between;
+      color: rgba(255,255,255,0.82);
+      font-size: 13px;
+    }
+    .track {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.14);
+      overflow: hidden;
+    }
+    .fill {
+      height: 100%;
+      width: var(--w, 40%);
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(124,92,255,0.95), rgba(34,197,94,0.9));
+      box-shadow: 0 10px 25px rgba(124,92,255,0.18);
+    }
+
+    .list h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+    }
+    .bullets {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+    .bullets li { margin: 8px 0; }
+
+    .cta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.92);
+      border-radius: 14px;
+      padding: 11px 12px;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.28);
+    }
+    .btn.primary {
+      background: rgba(124,92,255,0.20);
+      border-color: rgba(124,92,255,0.45);
+    }
+
+    footer {
+      position: relative;
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      color: rgba(255,255,255,0.62);
+      font-size: 12.5px;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 2px 6px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <section class="card" role="region" aria-label="Portfolio under development">
+      <header>
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div class="titleblock">
+            <h1>[Your Name] — Portfolio</h1>
+            <p>Building something meaningful. Thanks for stopping by.</p>
+          </div>
+        </div>
+        <div class="pill" title="Status">
+          <span class="dot" aria-hidden="true"></span>
+          Under development
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="panel hero">
+          <h2>🚧 Launching soon</h2>
+          <p>
+            I’m currently updating my portfolio with new projects, case studies, and writing.
+            This page will soon include my work in <strong>[your focus: software / data / UX / security]</strong>,
+            plus a résumé and contact links.
+          </p>
+
+          <div class="progress" aria-label="Progress">
+            <div class="barrow">
+              <div class="label"><span>Projects</span><span>60%</span></div>
+              <div class="track"><div class="fill" style="--w:60%"></div></div>
+            </div>
+            <div class="barrow">
+              <div class="label"><span>Case studies</span><span>35%</span></div>
+              <div class="track"><div class="fill" style="--w:35%"></div></div>
+            </div>
+            <div class="barrow">
+              <div class="label"><span>Writing / blog</span><span>20%</span></div>
+              <div class="track"><div class="fill" style="--w:20%"></div></div>
+            </div>
+          </div>
+
+          <div class="cta">
+            <a class="btn primary" href="mailto:[your-email@example.com]">✉️ Email me</a>
+            <a class="btn" href="https://www.linkedin.com/in/[your-handle]/" target="_blank" rel="noopener">in LinkedIn</a>
+            <a class="btn" href="https://github.com/[your-username]" target="_blank" rel="noopener">⌂ GitHub</a>
+          </div>
+        </div>
+
+        <div class="panel list">
+          <h3>What’s coming</h3>
+          <ul class="bullets">
+            <li><strong>Project highlights</strong> with screenshots and short write-ups</li>
+            <li><strong>Case studies</strong> showing how I think and solve problems</li>
+            <li><strong>Résumé</strong> and downloadable PDF</li>
+            <li><strong>Contact</strong> form + social links</li>
+          </ul>
+
+          <p style="margin:14px 0 0; color: var(--muted); line-height:1.55; font-size:14px;">
+            Tip: bookmark this page and check back soon. If you’re looking for something specific,
+            email me and I’ll share it directly.
+          </p>
+
+          <p style="margin:12px 0 0; color: rgba(255,255,255,0.62); font-size:12.5px;">
+            Deployed via <code>GitHub Pages</code>.
+          </p>
+        </div>
+      </div>
+
+      <footer>
+        <span>© <span id="y"></span> [Your Name]</span>
+        <span>Last updated: <span id="d"></span></span>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    const now = new Date();
+    document.getElementById("y").textContent = now.getFullYear();
+    document.getElementById("d").textContent = now.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "2-digit" });
+  </script>
+</body>
+</html>
