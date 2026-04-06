@@ -6,32 +6,32 @@ import "../styles/NVIDIA.scss"
 import NvidiaModal from "./NvidiaModal"
 
 // Helper to detect video media
-const isVideoFile = (url) => {
-  if (!url) return false;
-  const videoExtensions = [".webm", ".mp4", ".mov", ".avi"];
-  return videoExtensions.some((ext) => url.toLowerCase().endsWith(ext));
-};
+const isVideoFile = url => {
+  if (!url) return false
+  const videoExtensions = [".webm", ".mp4", ".mov", ".avi"]
+  return videoExtensions.some(ext => url.toLowerCase().endsWith(ext))
+}
 
 const NVIDIA = () => {
-  const { language } = useLanguage();
-  const [openModal, setOpenModal] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const { language } = useLanguage()
+  const [openModal, setOpenModal] = useState(false)
+  const [selectedIndex, setSelectedIndex] = useState(0)
 
   // Prepare items with resolved media
-  const items = data.nvidiaCarouselItems.map((item) => {
-    const baseMedia = item.media;
-    const galleryMedia = (item.gallery || []).filter(Boolean);
-    const mediaList = [baseMedia, ...galleryMedia].filter(Boolean);
+  const items = data.nvidiaCarouselItems.map(item => {
+    const baseMedia = item.media
+    const galleryMedia = (item.gallery || []).filter(Boolean)
+    const mediaList = [baseMedia, ...galleryMedia].filter(Boolean)
 
     return {
-    ...item,
+      ...item,
       media: baseMedia,
       mediaList,
-    title: getText(item.title, language),
+      title: getText(item.title, language),
       description: getText(item.description, language),
       tags: item.tags || [],
-    };
-  });
+    }
+  })
 
   return (
     <div className="section" id="nvidia">
@@ -40,7 +40,53 @@ const NVIDIA = () => {
           <h1>{getText(data.sections.nvidia, language)}</h1>
           {/* <h3>{getText(data.nvidiaTime, language)}</h3> */}
         </Fade>
-        
+
+        <Fade bottom distance="20px">
+          <div className="twi">
+            <div className="twi-left">
+              <span className="twi-badge">
+                {getText(data.technicalWorkIntro.timeframe, language)}
+              </span>
+            </div>
+            <div className="twi-divider" aria-hidden="true" />
+            <div className="twi-right">
+              <p className="twi-role">
+                {getText(data.technicalWorkIntro.role, language)}
+              </p>
+              <p className="twi-org">
+                {getText(data.technicalWorkIntro.organization, language)}
+              </p>
+              <a
+                href={data.technicalWorkIntro.supervisorUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="twi-supervisor"
+              >
+                <span className="twi-supervisor-label">
+                  {getText(data.technicalWorkIntro.supervisedByLabel, language)}
+                </span>
+                <span className="twi-supervisor-name">
+                  {getText(data.technicalWorkIntro.supervisorName, language)}
+                </span>
+                <svg
+                  className="twi-supervisor-icon"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5"
+                    stroke="currentColor"
+                    strokeWidth="1.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </Fade>
+
         <div className="nvidia-wrapper">
           <div className="nvidia-projects">
             {items.map((item, index) => (
@@ -48,16 +94,16 @@ const NVIDIA = () => {
                 className="nvidia-project"
                 key={index}
                 onClick={() => {
-                  setSelectedIndex(index);
-                  setOpenModal(true);
+                  setSelectedIndex(index)
+                  setOpenModal(true)
                 }}
                 role="button"
                 tabIndex={0}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setSelectedIndex(index);
-                    setOpenModal(true);
+                    e.preventDefault()
+                    setSelectedIndex(index)
+                    setOpenModal(true)
                   }
                 }}
               >
@@ -83,9 +129,7 @@ const NVIDIA = () => {
                     )}
 
                     <div className="nvidia-media-overlay">
-                      <div className="nvidia-media-overlay-button">
-                        View
-                      </div>
+                      <div className="nvidia-media-overlay-button">View</div>
                     </div>
                   </div>
                 </Fade>
@@ -109,7 +153,7 @@ const NVIDIA = () => {
                       {item.description}
                     </p>
                   </div>
-              </Fade>
+                </Fade>
               </section>
             ))}
           </div>
@@ -120,11 +164,11 @@ const NVIDIA = () => {
               id={selectedIndex}
               totalItems={items.length}
               onPrevious={() =>
-                setSelectedIndex((prev) => (prev > 0 ? prev - 1 : prev))
+                setSelectedIndex(prev => (prev > 0 ? prev - 1 : prev))
               }
               onNext={() =>
-                setSelectedIndex((prev) =>
-                  prev < items.length - 1 ? prev + 1 : prev
+                setSelectedIndex(prev =>
+                  prev < items.length - 1 ? prev + 1 : prev,
                 )
               }
               closeModal={setOpenModal}
